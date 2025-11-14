@@ -17,7 +17,7 @@
         :root {
             --primary-color: #1a1a1a;
             --secondary-color: #f5f5f5;
-            --accent-color: #4a90e2;
+            --accent-color: #4a4a4a;
             --text-color: #333;
             --text-light: #666;
         }
@@ -118,7 +118,49 @@
 
         /* Hero Section */
         #hero {
-            background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
+            background: linear-gradient(-45deg, #e8e8e8, #f5f5f5, #ebebeb, #f0f0f0);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(26, 26, 26, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(26, 26, 26, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(26, 26, 26, 0.02) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0);
+            }
+            33% {
+                transform: translate(30px, -30px);
+            }
+            66% {
+                transform: translate(-20px, 20px);
+            }
         }
 
         .hero-content {
@@ -126,6 +168,8 @@
             opacity: 0;
             animation: fadeIn 1s ease-out forwards;
             animation-delay: 0.3s;
+            position: relative;
+            z-index: 1;
         }
 
         .profile-image {
@@ -195,10 +239,8 @@
         }
 
         .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
         .about-text h2 {
@@ -214,31 +256,148 @@
             margin-bottom: 1rem;
         }
 
-        .skills-list {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .skill-item {
-            padding: 1rem;
+        /* Skills Section */
+        #skills {
             background: var(--secondary-color);
-            border-radius: 8px;
-            font-weight: 500;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .skill-item:hover {
-            transform: translateY(-5px);
-            background: var(--accent-color);
-            color: white;
         }
 
         /* Projects Section */
         #projects {
             background: var(--secondary-color);
+        }
+
+        /* Timeline Section */
+        #timeline {
+            background: white;
+        }
+
+        .timeline-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 3rem auto;
+            padding: 2rem 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            height: 100%;
+            background: var(--accent-color);
+            opacity: 0.3;
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 3rem;
+            position: relative;
+            opacity: 0;
+            transition: all 0.6s ease;
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+        }
+
+        .timeline-item.left {
+            justify-content: flex-start;
+        }
+
+        .timeline-item.right {
+            justify-content: flex-end;
+        }
+
+        .timeline-content {
+            width: 45%;
+            background: var(--secondary-color);
+            padding: 2rem;
+            border-radius: 12px;
+            position: relative;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .timeline-content:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .timeline-item.left .timeline-content {
+            margin-right: auto;
+            transform-origin: right;
+        }
+
+        .timeline-item.right .timeline-content {
+            margin-left: auto;
+            transform-origin: left;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 16px;
+            height: 16px;
+            background: var(--accent-color);
+            border: 4px solid white;
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px var(--secondary-color);
+            z-index: 2;
+        }
+
+        .timeline-content h3 {
+            font-size: 1.4rem;
+            color: var(--primary-color);
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-content h4 {
+            font-size: 1.1rem;
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .timeline-date {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-details {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .timeline-details p {
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-details ul {
+            margin-top: 0.75rem;
+            padding-left: 1.25rem;
+        }
+
+        .timeline-details li {
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-type {
+            display: inline-block;
+            background: var(--accent-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            margin-left: 0.5rem;
         }
 
         .section-title {
@@ -270,11 +429,11 @@
         .project-image {
             width: 100%;
             height: 200px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #e8e8e8;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
+            color: var(--text-color);
             font-size: 3rem;
             font-weight: 700;
         }
@@ -308,6 +467,28 @@
         /* Contact Section */
         #contact {
             background: white;
+        }
+
+        /* Awards Section */
+        #awards {
+            background: var(--secondary-color);
+        }
+
+        .awards-list {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding-left: 2rem;
+        }
+
+        .awards-list li {
+            padding: 1rem 0;
+            color: var(--text-color);
+            line-height: 1.8;
+        }
+
+        .award-title {
+            font-weight: 600;
+            color: var(--primary-color);
         }
 
         .contact-content {
@@ -369,12 +550,9 @@
                 font-size: 1.2rem;
             }
 
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-
             nav ul {
                 gap: 1rem;
+                font-size: 0.9rem;
             }
 
             .contact-links {
@@ -382,8 +560,23 @@
                 align-items: center;
             }
 
-            .skills-list {
-                grid-template-columns: 1fr;
+            /* Timeline mobile styles */
+            .timeline-line {
+                left: 20px;
+            }
+
+            .timeline-item.left,
+            .timeline-item.right {
+                justify-content: flex-start;
+                padding-left: 50px;
+            }
+
+            .timeline-content {
+                width: 100%;
+            }
+
+            .timeline-dot {
+                left: 20px;
             }
         }
     </style>
@@ -396,7 +589,10 @@
             <ul>
                 <li><a href="#hero">Home</a></li>
                 <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#timeline">Timeline</a></li>
                 <li><a href="#projects">Projects</a></li>
+                <li><a href="#awards">Awards</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
@@ -431,20 +627,66 @@
                         high-performance results.
                     </p>
                 </div>
-                <div>
-                    <div class="skills-list">
-                        <div class="skill-item">Java</div>
-                        <div class="skill-item">Python</div>
-                        <div class="skill-item">Spring Boot</div>
-                        <div class="skill-item">Node.js</div>
-                        <div class="skill-item">AWS</div>
-                        <div class="skill-item">Docker</div>
-                        <div class="skill-item">Kubernetes</div>
-                        <div class="skill-item">MongoDB</div>
-                        <div class="skill-item">MySQL</div>
-                        <div class="skill-item">Redis</div>
-                        <div class="skill-item">Microservices</div>
-                        <div class="skill-item">CI/CD</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title fade-in-element">Skills</h2>
+            <!-- Skills content to be added -->
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section id="timeline">
+        <div class="container">
+            <h2 class="section-title fade-in-element">My Journey</h2>
+            <div class="timeline-container">
+                <div class="timeline-line"></div>
+                
+                <!-- FPrime - Left (Most Recent) -->
+                <div class="timeline-item left fade-in-element">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">Oct 2025 – Present</span>
+                        <span class="timeline-type">Work</span>
+                        <h3>FPrime AI</h3>
+                        <h4>Software Engineer Intern</h4>
+                    </div>
+                </div>
+
+                <!-- CMU - Right -->
+                <div class="timeline-item right fade-in-element">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">Aug 2024 – Aug 2025</span>
+                        <span class="timeline-type">Education</span>
+                        <h3>Carnegie Mellon University</h3>
+                        <h4>Master of Information Systems</h4>
+                    </div>
+                </div>
+
+                <!-- TCS - Left -->
+                <div class="timeline-item left fade-in-element">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">Aug 2021 – Jul 2024</span>
+                        <span class="timeline-type">Work</span>
+                        <h3>Tata Consultancy Services</h3>
+                        <h4>Software Engineer</h4>
+                    </div>
+                </div>
+
+                <!-- Undergrad - Right -->
+                <div class="timeline-item right fade-in-element">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">Jul 2017 – Jun 2021</span>
+                        <span class="timeline-type">Education</span>
+                        <h3>Maulana Abul Kalam Azad University of Technology</h3>
+                        <h4>B.Tech. in Computer Science and Engineering</h4>
                     </div>
                 </div>
             </div>
@@ -465,7 +707,7 @@
                     </div>
                 </div>
                 <div class="project-card fade-in-element">
-                    <div class="project-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">02</div>
+                    <div class="project-image">02</div>
                     <div class="project-content">
                         <h3>Data Intensive Scalable Bookstore</h3>
                         <p>Built a cloud-native, microservices-based backend using Node.js and AWS EKS. Automated infrastructure with CloudFormation to deploy VPCs, EC2, ALBs, and RDS databases.</p>
@@ -473,7 +715,7 @@
                     </div>
                 </div>
                 <div class="project-card fade-in-element">
-                    <div class="project-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">03</div>
+                    <div class="project-image">03</div>
                     <div class="project-content">
                         <h3>Charity Scout</h3>
                         <p>Developed a distributed Android application with Java servlet backend, integrating OrgHunter API. Implemented sharded MongoDB Atlas logging system for real-time analytics and observability.</p>
@@ -481,6 +723,21 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Awards Section -->
+    <section id="awards">
+        <div class="container">
+            <h2 class="section-title fade-in-element">Awards & Recognition</h2>
+            <ul class="awards-list fade-in-element">
+                <li><span class="award-title">On the Spot Award (2×)</span> - Recognized twice at Tata Consultancy Services for exceptional delivery and performance (2021-2024)</li>
+                <li><span class="award-title">Outstanding Contribution Award</span> - Recognized at Tata Consultancy Services for exceptional contribution to team (2021-2024)</li>
+                <li><span class="award-title">Master's with Distinction</span> - Graduated with Distinction at Carnegie Mellon University (2024-2025)</li>
+                <li><span class="award-title">International Client Engagement</span> - Selected as youngest team member for on-site client engagement in South Africa (2022)</li>
+                <li><span class="award-title">Best Student Contribution</span> - Recieved the "Director's Choice Award for Best Student Contribution" in Bachelor's degree</li>
+                <li><span class="award-title">Academic Excellence</span> - Graduated with 9.08/10.0 GPA in Bachelor's degree (2021)</li>
+            </ul>
         </div>
     </section>
 
