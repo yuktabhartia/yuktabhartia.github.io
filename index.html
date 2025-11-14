@@ -163,6 +163,71 @@
             }
         }
 
+        /* Animated circles */
+        .hero-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(26, 26, 26, 0.08);
+            pointer-events: none;
+            will-change: transform;
+        }
+
+        .circle-1 {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            left: 10%;
+        }
+
+        .circle-2 {
+            width: 200px;
+            height: 200px;
+            top: 60%;
+            right: 15%;
+        }
+
+        .circle-3 {
+            width: 150px;
+            height: 150px;
+            bottom: 20%;
+            left: 50%;
+        }
+
+        .circle-4 {
+            width: 250px;
+            height: 250px;
+            top: 30%;
+            right: 30%;
+        }
+
+        .circle-5 {
+            width: 180px;
+            height: 180px;
+            bottom: 30%;
+            left: 20%;
+        }
+
+        .circle-6 {
+            width: 220px;
+            height: 220px;
+            top: 50%;
+            left: 60%;
+        }
+
+        .circle-7 {
+            width: 160px;
+            height: 160px;
+            top: 15%;
+            right: 20%;
+        }
+
+        .circle-8 {
+            width: 190px;
+            height: 190px;
+            bottom: 15%;
+            right: 40%;
+        }
+
         .hero-content {
             text-align: center;
             opacity: 0;
@@ -600,6 +665,14 @@
 
     <!-- Hero Section -->
     <section id="hero">
+        <div class="hero-circle circle-1"></div>
+        <div class="hero-circle circle-2"></div>
+        <div class="hero-circle circle-3"></div>
+        <div class="hero-circle circle-4"></div>
+        <div class="hero-circle circle-5"></div>
+        <div class="hero-circle circle-6"></div>
+        <div class="hero-circle circle-7"></div>
+        <div class="hero-circle circle-8"></div>
         <div class="container">
             <div class="hero-content">
                 <img src="profile.jpg" alt="Yukta Bhartia" class="profile-image">
@@ -737,6 +810,8 @@
                 <li><span class="award-title">International Client Engagement</span> - Selected as youngest team member for on-site client engagement in South Africa (2022)</li>
                 <li><span class="award-title">Best Student Contribution</span> - Recieved the "Director's Choice Award for Best Student Contribution" in Bachelor's degree</li>
                 <li><span class="award-title">Academic Excellence</span> - Graduated with 9.08/10.0 GPA in Bachelor's degree (2021)</li>
+
+
             </ul>
         </div>
     </section>
@@ -815,6 +890,48 @@
                     link.classList.add('active');
                 }
             });
+        });
+
+        // Cursor-following bubbles animation
+        const heroSection = document.querySelector('#hero');
+        const circles = document.querySelectorAll('.hero-circle');
+        
+        let mouseX = 0;
+        let mouseY = 0;
+        
+        heroSection.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        circles.forEach((circle, index) => {
+            let circleX = 0;
+            let circleY = 0;
+            
+            // Different speeds for each circle
+            const speed = 0.02 + (index * 0.01);
+            
+            function animate() {
+                // Get circle's current position
+                const rect = circle.getBoundingClientRect();
+                const circleCenterX = rect.left + rect.width / 2;
+                const circleCenterY = rect.top + rect.height / 2;
+                
+                // Calculate distance to mouse
+                const distX = mouseX - circleCenterX;
+                const distY = mouseY - circleCenterY;
+                
+                // Move circle towards mouse with easing
+                circleX += distX * speed;
+                circleY += distY * speed;
+                
+                // Apply transform
+                circle.style.transform = `translate(${circleX}px, ${circleY}px)`;
+                
+                requestAnimationFrame(animate);
+            }
+            
+            animate();
         });
     </script>
 </body>
