@@ -163,69 +163,14 @@
             }
         }
 
-        /* Animated circles */
-        .hero-circle {
+        /* Star particle canvas */
+        #starCanvas {
             position: absolute;
-            border-radius: 50%;
-            background: rgba(26, 26, 26, 0.08);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             pointer-events: none;
-            will-change: transform;
-        }
-
-        .circle-1 {
-            width: 300px;
-            height: 300px;
-            top: 10%;
-            left: 10%;
-        }
-
-        .circle-2 {
-            width: 200px;
-            height: 200px;
-            top: 60%;
-            right: 15%;
-        }
-
-        .circle-3 {
-            width: 150px;
-            height: 150px;
-            bottom: 20%;
-            left: 50%;
-        }
-
-        .circle-4 {
-            width: 250px;
-            height: 250px;
-            top: 30%;
-            right: 30%;
-        }
-
-        .circle-5 {
-            width: 180px;
-            height: 180px;
-            bottom: 30%;
-            left: 20%;
-        }
-
-        .circle-6 {
-            width: 220px;
-            height: 220px;
-            top: 50%;
-            left: 60%;
-        }
-
-        .circle-7 {
-            width: 160px;
-            height: 160px;
-            top: 15%;
-            right: 20%;
-        }
-
-        .circle-8 {
-            width: 190px;
-            height: 190px;
-            bottom: 15%;
-            right: 40%;
         }
 
         .hero-content {
@@ -324,6 +269,32 @@
         /* Skills Section */
         #skills {
             background: var(--secondary-color);
+        }
+
+        .skills-content {
+            max-width: 900px;
+            margin: 2rem auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .skill-category h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .skill-category ul {
+            list-style: disc;
+            padding-left: 1.5rem;
+            color: var(--text-light);
+        }
+
+        .skill-category li {
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
         }
 
         /* Projects Section */
@@ -494,13 +465,14 @@
         .project-image {
             width: 100%;
             height: 200px;
-            background: #e8e8e8;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--text-color);
+            color: white;
             font-size: 3rem;
             font-weight: 700;
+            position: relative;
+            overflow: hidden;
         }
 
         .project-content {
@@ -531,6 +503,11 @@
 
         /* Contact Section */
         #contact {
+            background: white;
+        }
+
+        /* Beyond Work Section */
+        #beyond {
             background: white;
         }
 
@@ -658,6 +635,7 @@
                 <li><a href="#timeline">Timeline</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#awards">Awards</a></li>
+                <li><a href="#beyond">Beyond Work</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
@@ -665,14 +643,7 @@
 
     <!-- Hero Section -->
     <section id="hero">
-        <div class="hero-circle circle-1"></div>
-        <div class="hero-circle circle-2"></div>
-        <div class="hero-circle circle-3"></div>
-        <div class="hero-circle circle-4"></div>
-        <div class="hero-circle circle-5"></div>
-        <div class="hero-circle circle-6"></div>
-        <div class="hero-circle circle-7"></div>
-        <div class="hero-circle circle-8"></div>
+        <canvas id="starCanvas"></canvas>
         <div class="container">
             <div class="hero-content">
                 <img src="profile.jpg" alt="Yukta Bhartia" class="profile-image">
@@ -708,7 +679,59 @@
     <section id="skills">
         <div class="container">
             <h2 class="section-title fade-in-element">Skills</h2>
-            <!-- Skills content to be added -->
+            <div class="skills-content fade-in-element">
+                <div class="skill-category">
+                    <h3>Languages & Frameworks</h3>
+                    <ul>
+                        <li>Java</li>
+                        <li>Python</li>
+                        <li>C/C++</li>
+                        <li>Spring Boot</li>
+                        <li>Node.js</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Cloud Platforms</h3>
+                    <ul>
+                        <li>AWS (EC2, RDS, CloudFormation)</li>
+                        <li>Microsoft Azure</li>
+                        <li>Google Cloud Platform (GCP)</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>DevOps & Tools</h3>
+                    <ul>
+                        <li>Docker</li>
+                        <li>Kubernetes</li>
+                        <li>Jenkins</li>
+                        <li>Git</li>
+                        <li>CI/CD</li>
+                        <li>JIRA</li>
+                        <li>Postman</li>
+                        <li>Grafana</li>
+                        <li>Prometheus</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Databases</h3>
+                    <ul>
+                        <li>MySQL</li>
+                        <li>MongoDB</li>
+                        <li>Redis</li>
+                        <li>Oracle</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Core Skills</h3>
+                    <ul>
+                        <li>Microservices</li>
+                        <li>System Design</li>
+                        <li>Agile</li>
+                        <li>API Design</li>
+                        <li>CI/CD</li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -772,7 +795,7 @@
             <h2 class="section-title fade-in-element">Projects</h2>
             <div class="projects-grid">
                 <div class="project-card fade-in-element">
-                    <div class="project-image">01</div>
+                    <div class="project-image" style="background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%), url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="%231a1a1a"/><path d="M0 50h100M50 0v100" stroke="%23333" stroke-width="1"/></svg>'); background-size: cover, 20px 20px;"></div>
                     <div class="project-content">
                         <h3>Scalable Movie Recommendation System</h3>
                         <p>Designed a low-latency, highly available recommendation system for 1M users using ALS-based collaborative filtering. Integrated Apache Kafka for real-time ingestion and deployed with Docker, Kubernetes, and CI/CD.</p>
@@ -780,7 +803,7 @@
                     </div>
                 </div>
                 <div class="project-card fade-in-element">
-                    <div class="project-image">02</div>
+                    <div class="project-image" style="background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%), url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="%231a1a1a"/><circle cx="50" cy="50" r="30" stroke="%23333" fill="none" stroke-width="1"/></svg>'); background-size: cover, 40px 40px;"></div>
                     <div class="project-content">
                         <h3>Data Intensive Scalable Bookstore</h3>
                         <p>Built a cloud-native, microservices-based backend using Node.js and AWS EKS. Automated infrastructure with CloudFormation to deploy VPCs, EC2, ALBs, and RDS databases.</p>
@@ -788,7 +811,7 @@
                     </div>
                 </div>
                 <div class="project-card fade-in-element">
-                    <div class="project-image">03</div>
+                    <div class="project-image" style="background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%), url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="%231a1a1a"/><polygon points="50,20 80,80 20,80" stroke="%23333" fill="none" stroke-width="1"/></svg>'); background-size: cover, 50px 50px;"></div>
                     <div class="project-content">
                         <h3>Charity Scout</h3>
                         <p>Developed a distributed Android application with Java servlet backend, integrating OrgHunter API. Implemented sharded MongoDB Atlas logging system for real-time analytics and observability.</p>
@@ -809,10 +832,15 @@
                 <li><span class="award-title">Master's with Distinction</span> - Graduated with Distinction at Carnegie Mellon University (2024-2025)</li>
                 <li><span class="award-title">International Client Engagement</span> - Selected as youngest team member for on-site client engagement in South Africa (2022)</li>
                 <li><span class="award-title">Best Student Contribution</span> - Recieved the "Director's Choice Award for Best Student Contribution" in Bachelor's degree</li>
-                <li><span class="award-title">Academic Excellence</span> - Graduated with 9.08/10.0 GPA in Bachelor's degree (2021)</li>
-
-
             </ul>
+        </div>
+    </section>
+
+    <!-- Beyond Work Section -->
+    <section id="beyond">
+        <div class="container">
+            <h2 class="section-title fade-in-element">Beyond Work</h2>
+            <!-- Content to be added -->
         </div>
     </section>
 
@@ -828,6 +856,9 @@
                     <a href="mailto:yukta.bhartia2024@gmail.com" class="contact-link">Email Me</a>
                     <a href="https://github.com/yuktabhartia" target="_blank" class="contact-link">GitHub</a>
                     <a href="https://linkedin.com/in/bhartiayukta" target="_blank" class="contact-link">LinkedIn</a>
+                </div>
+                <div style="margin-top: 3rem;">
+                    <a href="resume.pdf" download class="cta-button" style="background: var(--primary-color); color: white; text-decoration: none; display: inline-block;">Download Resume</a>
                 </div>
             </div>
         </div>
@@ -892,47 +923,144 @@
             });
         });
 
-        // Cursor-following bubbles animation
+        // Star particle system with connecting lines
+        const canvas = document.getElementById('starCanvas');
+        const ctx = canvas.getContext('2d');
         const heroSection = document.querySelector('#hero');
-        const circles = document.querySelectorAll('.hero-circle');
         
-        let mouseX = 0;
-        let mouseY = 0;
+        // Set canvas size
+        function resizeCanvas() {
+            canvas.width = heroSection.offsetWidth;
+            canvas.height = heroSection.offsetHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        // Particle class
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 3 + 1;
+                this.speedX = Math.random() * 0.5 - 0.25;
+                this.speedY = Math.random() * 0.5 - 0.25;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                // Wrap around edges
+                if (this.x > canvas.width) this.x = 0;
+                if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0;
+                if (this.y < 0) this.y = canvas.height;
+            }
+
+            draw() {
+                ctx.fillStyle = 'rgba(26, 26, 26, 0.4)';
+                ctx.beginPath();
+                
+                // Draw star shape
+                const spikes = 5;
+                const outerRadius = this.size;
+                const innerRadius = this.size / 2;
+                
+                for (let i = 0; i < spikes * 2; i++) {
+                    const radius = i % 2 === 0 ? outerRadius : innerRadius;
+                    const angle = (i * Math.PI) / spikes;
+                    const x = this.x + Math.cos(angle) * radius;
+                    const y = this.y + Math.sin(angle) * radius;
+                    
+                    if (i === 0) {
+                        ctx.moveTo(x, y);
+                    } else {
+                        ctx.lineTo(x, y);
+                    }
+                }
+                
+                ctx.closePath();
+                ctx.fill();
+            }
+        }
+
+        // Create particles
+        const particlesArray = [];
+        const numberOfParticles = 80;
         
+        for (let i = 0; i < numberOfParticles; i++) {
+            particlesArray.push(new Particle());
+        }
+
+        // Mouse tracking
+        let mouse = {
+            x: null,
+            y: null,
+            radius: 150
+        };
+
         heroSection.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
+            const rect = heroSection.getBoundingClientRect();
+            mouse.x = e.clientX - rect.left;
+            mouse.y = e.clientY - rect.top;
         });
 
-        circles.forEach((circle, index) => {
-            let circleX = 0;
-            let circleY = 0;
+        heroSection.addEventListener('mouseleave', () => {
+            mouse.x = null;
+            mouse.y = null;
+        });
+
+        // Connect particles
+        function connectParticles() {
+            for (let a = 0; a < particlesArray.length; a++) {
+                for (let b = a + 1; b < particlesArray.length; b++) {
+                    const dx = particlesArray[a].x - particlesArray[b].x;
+                    const dy = particlesArray[a].y - particlesArray[b].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    // Connect nearby particles
+                    if (distance < 120) {
+                        ctx.strokeStyle = `rgba(26, 26, 26, ${0.08 * (1 - distance / 120)})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.beginPath();
+                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                        ctx.stroke();
+                    }
+
+                    // Connect to mouse if close
+                    if (mouse.x !== null && mouse.y !== null) {
+                        const dxMouse = particlesArray[a].x - mouse.x;
+                        const dyMouse = particlesArray[a].y - mouse.y;
+                        const distanceToMouse = Math.sqrt(dxMouse * dxMouse + dyMouse * dyMouse);
+
+                        if (distanceToMouse < mouse.radius) {
+                            ctx.strokeStyle = `rgba(26, 26, 26, ${0.15 * (1 - distanceToMouse / mouse.radius)})`;
+                            ctx.lineWidth = 1;
+                            ctx.beginPath();
+                            ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                            ctx.lineTo(mouse.x, mouse.y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+            }
+        }
+
+        // Animation loop
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
             
-            // Different speeds for each circle
-            const speed = 0.02 + (index * 0.01);
-            
-            function animate() {
-                // Get circle's current position
-                const rect = circle.getBoundingClientRect();
-                const circleCenterX = rect.left + rect.width / 2;
-                const circleCenterY = rect.top + rect.height / 2;
-                
-                // Calculate distance to mouse
-                const distX = mouseX - circleCenterX;
-                const distY = mouseY - circleCenterY;
-                
-                // Move circle towards mouse with easing
-                circleX += distX * speed;
-                circleY += distY * speed;
-                
-                // Apply transform
-                circle.style.transform = `translate(${circleX}px, ${circleY}px)`;
-                
-                requestAnimationFrame(animate);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
             }
             
-            animate();
-        });
+            connectParticles();
+            requestAnimationFrame(animate);
+        }
+
+        animate();
     </script>
 </body>
 </html>
